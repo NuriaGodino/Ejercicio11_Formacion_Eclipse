@@ -2,12 +2,13 @@ package dao;
 
 import java.util.List;
 
-import model.Alumno;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
-public interface AlumnoDao {
-	Alumno findByUsuarioAndPassword(String usuario, String password);
-	List<Alumno> findByCurso(String nombreCurso);
-	List<Alumno> findAll();
-	Alumno findById(String usuario);
-	void update(Alumno alumno);
+import model.Alumno;
+									
+public interface AlumnoDao extends JpaRepository<Alumno, String>{
+	Alumno findByUsuarioAndPassword(String usuario, String password); 
+	@Query("select a from Alumno a join a.matriculas m where m.curso.nombre =?1") 
+	List<Alumno> findByCurso(String nombreCurso); 
 }

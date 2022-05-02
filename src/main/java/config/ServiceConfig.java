@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -18,7 +19,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement //habilita la transacccionalidad mediante anotaciones
 @PropertySource(value = "classpath:config/application.properties")
 @Configuration
-@ComponentScan(basePackages = { "service", "dao" })
+@ComponentScan(basePackages = {"service", "converters"})
+@EnableJpaRepositories(basePackages = {"dao"}, entityManagerFactoryRef = "factory", transactionManagerRef = "txManager") //le especificamos el nombre dle obj encargado de crear los em y el nombre del obj encargado de la tans
 public class ServiceConfig {
 	@Value("${driver}")
 	String driver;

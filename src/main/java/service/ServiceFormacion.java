@@ -1,9 +1,11 @@
 package service;
 
+import java.util.Date;
 import java.util.List;
 
-import model.Alumno;
-import model.Curso;
+import dto.AlumnoDto;
+import dto.CursoDto;
+import dto.MatriculaDto;
 
 public interface ServiceFormacion {
 	/**
@@ -14,10 +16,16 @@ public interface ServiceFormacion {
 		- Matricular alumno. A partir del usuario e idCurso, el alumno se matriula en dicho curso
 	 */
 	
-	Alumno validarUsuario(String usuario, String password);
-	List<Curso>	cursosDelAlumno(String usuario);
-	List<Curso> listaDeCursos();
-	public List<Alumno> listaDeAlumnos();
-	List<Alumno> alumosPorCurso(String nombreCurso);
-	void matriculaAlumno(String usuario, int idCurso);
+	AlumnoDto validarUsuario(String usuario, String password);
+	List<CursoDto>	cursosDelAlumno(String usuario);
+	List<CursoDto> listaDeCursos();
+	public List<AlumnoDto> listaDeAlumnos();
+	List<AlumnoDto> alumosPorCurso(String nombreCurso);
+	boolean matriculaAlumno(String usuario, int idCurso);
+	
+	//public List<Curso> findCursoMatriculados(String usuario);
+	public boolean altaCurso(CursoDto curso);
+	public boolean altaAlumno(AlumnoDto alumno);
+	public List<MatriculaDto> consultarMatriculas(Date f1, Date f2);
+	public List<CursoDto> cursosPosibleMatricula(String usuario);
 }

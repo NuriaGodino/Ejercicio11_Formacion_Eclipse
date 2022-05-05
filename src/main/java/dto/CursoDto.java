@@ -3,6 +3,8 @@ package dto;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,5 +20,6 @@ public class CursoDto {
 	private String nombre;
 	private int duracion;
 	private double precio;
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date fechaInicio;
 }

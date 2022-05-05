@@ -60,7 +60,8 @@ public class FormacionController {
 	}
 	
 	@PostMapping("AltaCurso")
-	public String altaCurso(@ModelAttribute CursoDto c) {
+	public String altaCurso(@ModelAttribute CursoDto c, @DateTimeFormat(pattern = "yyyy-MM-dd") @RequestParam("fecha") Date fecha) {
+		c.setFechaInicio(fecha);
 		service.altaCurso(c);
 		return "altaCurso";
 	}
@@ -72,8 +73,8 @@ public class FormacionController {
 	
 	
 	@GetMapping(value="CursosFechaBetween", produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody List<MatriculaDto> cursosFechaBetween(@RequestParam("first") @DateTimeFormat(pattern="yyyy-MM-dd") Date first, 
-														@RequestParam("second") @DateTimeFormat(pattern="yyyy-MM-dd") Date second){
+	public @ResponseBody List<MatriculaDto> cursosFechaBetween( @DateTimeFormat(pattern="yyyy-MM-dd") @RequestParam("f1") Date first, 
+														 @DateTimeFormat(pattern="yyyy-MM-dd") @RequestParam("f2") Date second){
 		return service.consultarMatriculas(first, second);
 	}
 	
